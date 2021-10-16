@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 
 function Remote(data) {
-  console.log(data.data.message);
-  return <div>{data.data.message}</div>;
+  console.log(data.data);
+  const message = data.data.message ? data.data.message : JSON.stringify(data.data.todos);
+  return <div>{message}</div>;
 }
 
 async function getRemoteData() {
-  const data = await fetch("/api/hello");
+  const data = await fetch("/api/todos");
   return data.json();
 }
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     (async function () {
       const result = await getRemoteData();
-      console.log({ result });
+      console.log(result);
       setRemoteData(result);
     })();
   }, []);
