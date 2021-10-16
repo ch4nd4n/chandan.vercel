@@ -2,5 +2,7 @@
 
 export default (req, res) => {
   res.statusCode = 200;
-  res.json({ message: "John Doe" });
+  setTimeout(() => {
+    res.json({ message: "John Doe" });
+  }, 1000);
 };
